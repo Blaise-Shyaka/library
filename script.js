@@ -75,11 +75,15 @@ function addCard(arr, obj) {
   return card;
 }
 
+let booksList = [];
+
 function printCard(arr) {
   const markup = arr.map(elt => addCard(arr, elt)).join('');
-  const booksList = document.querySelector('#books_list');
+  booksList = document.querySelector('#books_list');
 
   booksList.innerHTML = markup;
+  let allDeleteBtn = document.querySelectorAll('.dlt-button');
+  allDeleteBtn.forEach(dltButton => dltButton.addEventListener('click', deleteOneCard));
 }
 
 function addBookToLibrary() {
@@ -97,6 +101,8 @@ function addBookToLibrary() {
 
 const addBook = document.querySelector('#addBook');
 
+let deleteButtons = [];
+
 addBook.addEventListener('click', () => {
   addBookToLibrary();
   printCard(myLibrary);
@@ -104,12 +110,7 @@ addBook.addEventListener('click', () => {
 
 function deleteOneCard(event) {
   const clickedButton = event.currentTarget;
-  console.log(clickedButton);
   const correspondingBookIndex = clickedButton.dataset.indexNumber;
   myLibrary.splice(correspondingBookIndex, 1);
   printCard(myLibrary);
 }
-
-deleteButtons.forEach(elt => {
-  elt.addEventListener('click', deleteOneCard);
-});
