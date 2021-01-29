@@ -4,10 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <style href="style.css" ></style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </head>
 <body>
+    <div class="container">
+        <div class="row my-5">
+            <div class="form_book w-50 m-auto">
+                <h1 class="text-center">BOOK LIBRARY</h1>
 
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Title of the book">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Author" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="Author" placeholder="Author of the book">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Pages" class="form-label">Pages</label>
+                    <input type="number" class="form-control" id="Pages" placeholder="Pages of the book">
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="check_book">
+                    <label class="form-check-label" for="check_book">
+                      Read
+                    </label>
+                </div>
+
+                <div class="mb-3">
+                    <button class="btn btn-primary btn-lg">Add a book</button>
+                </div>
+
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card text-center text-dark bg-light">
+                    <div class="card-header">
+                        Title
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Author</h5>
+                        <p class="card-text">200 pages</p>
+                        <a href="#" class="btn btn-primary">Read</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-center text-dark bg-light">
+                    <div class="card-header">
+                        Title
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Author</h5>
+                        <p class="card-text">200 pages</p>
+                        <a href="#" class="btn btn-primary">Read</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-center text-dark bg-light">
+                    <div class="card-header">
+                        Title
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Author</h5>
+                        <p class="card-text">200 pages</p>
+                        <a href="#" class="btn btn-primary">Read</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 </body>
 </html>
