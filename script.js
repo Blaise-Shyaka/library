@@ -56,6 +56,13 @@ function cleanNoticeBoard() {
   document.querySelector('#pages-notice').innerHTML = '';
 }
 
+function cleanForm(){
+  document.querySelector('#title').value = '';
+  document.querySelector('#author').value = '';
+  document.querySelector('#pages').value = '';
+  document.querySelector('#checkbox').checked = false;
+}
+
 function addCard(arr, obj) {
   const card = `<div class='col-sm-4 my-2'>
     <div class='card text-center text-dark bg-light'>
@@ -106,6 +113,7 @@ let deleteButtons = [];
 addBook.addEventListener('click', () => {
   addBookToLibrary();
   printCard(myLibrary);
+  cleanForm()
 });
 
 function deleteOneCard(event) {
