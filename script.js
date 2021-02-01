@@ -1,5 +1,8 @@
+/* eslint-disable func-names */
+/* eslint-disable no-use-before-define */
 import {
   getDomElement, setInnerHTML, setValue, setCheckedValue, getAllElementsOfType, addEvent,
+// eslint-disable-next-line import/extensions
 } from './dom.js';
 
 const myLibrary = [];
@@ -96,10 +99,12 @@ function printCard(arr) {
   setInnerHTML(booksList, markup);
   const allDeleteBtn = getAllElementsOfType('.dlt-button');
   const allToggleBtn = getAllElementsOfType('.toggle');
+
   addEvent(allDeleteBtn, 'click', deleteOneCard);
   addEvent(allToggleBtn, 'click', toggleBookStatus);
 }
 
+// eslint-disable-next-line consistent-return
 function addBookToLibrary() {
   cleanNoticeBoard();
 
