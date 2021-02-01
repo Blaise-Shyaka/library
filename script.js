@@ -1,4 +1,6 @@
-// const { constants } = require("buffer");
+import {
+  getDomElement, setInnerHTML, setValue, setCheckedValue, getAllElementsOfType, addEvent,
+} from './dom.js';
 
 const myLibrary = [];
 
@@ -13,10 +15,10 @@ function Book(title, author, pages, readStatus) {
 }
 
 function getUserInput() {
-  const title = document.querySelector('#title').value;
-  const author = document.querySelector('#author').value;
-  const pages = document.querySelector('#pages').value;
-  const readStatus = document.querySelector('#checkbox').checked;
+  const title = getDomElement('#title').value;
+  const author = getDomElement('#author').value;
+  const pages = getDomElement('#pages').value;
+  const readStatus = getDomElement('#checkbox').checked;
 
   return {
     title,
@@ -38,34 +40,34 @@ function validateForm(obj) {
 }
 
 function notifyUser(obj) {
-  const titleNotice = document.querySelector('#title-notice');
-  const authorNotice = document.querySelector('#author-notice');
-  const pagesNotice = document.querySelector('#pages-notice');
+  const titleNotice = getDomElement('#title-notice');
+  const authorNotice = getDomElement('#author-notice');
+  const pagesNotice = getDomElement('#pages-notice');
 
   if (obj.title.length === 0) {
-    titleNotice.innerHTML = 'Title is required';
+    setInnerHTML(titleNotice, 'Title is required');
   }
 
   if (obj.author.length === 0) {
-    authorNotice.innerHTML = 'Author is required';
+    setInnerHTML(authorNotice, 'Author is required');
   }
 
   if (obj.pages.length === 0) {
-    pagesNotice.innerHTML = 'Number of pages is required';
+    setInnerHTML(pagesNotice, 'Number of pages is required');
   }
 }
 
 function cleanNoticeBoard() {
-  document.querySelector('#title-notice').innerHTML = '';
-  document.querySelector('#author-notice').innerHTML = '';
-  document.querySelector('#pages-notice').innerHTML = '';
+  setInnerHTML(getDomElement('#title-notice'), '');
+  setInnerHTML(getDomElement('#author-notice'), '');
+  setInnerHTML(getDomElement('#pages-notice'), '');
 }
 
 function cleanForm() {
-  document.querySelector('#title').value = '';
-  document.querySelector('#author').value = '';
-  document.querySelector('#pages').value = '';
-  document.querySelector('#checkbox').checked = false;
+  setValue(getDomElement('#title'), '');
+  setValue(getDomElement('#author'), '');
+  setValue(getDomElement('#pages'), '');
+  setCheckedValue(getDomElement('#checkbox'), false);
 }
 
 function addCard(arr, obj) {
@@ -90,13 +92,12 @@ let booksList = [];
 
 function printCard(arr) {
   const markup = arr.map(elt => addCard(arr, elt)).join('');
-  booksList = document.querySelector('#books_list');
-
-  booksList.innerHTML = markup;
-  const allDeleteBtn = document.querySelectorAll('.dlt-button');
-  const allToggleBtn = document.querySelectorAll('.toggle');
-  allDeleteBtn.forEach(dltButton => dltButton.addEventListener('click', deleteOneCard));
-  allToggleBtn.forEach(toggleButton => toggleButton.addEventListener('click', toggleBookStatus));
+  booksList = getDomElement('#books_list');
+  setInnerHTML(booksList, markup);
+  const allDeleteBtn = getAllElementsOfType('.dlt-button');
+  const allToggleBtn = getAllElementsOfType('.toggle');
+  addEvent(allDeleteBtn, 'click', deleteOneCard);
+  addEvent(allToggleBtn, 'click', toggleBookStatus);
 }
 
 function addBookToLibrary() {
@@ -112,9 +113,7 @@ function addBookToLibrary() {
   myLibrary.push(newBook);
 }
 
-const addBook = document.querySelector('#addBook');
-
-let deleteButtons = [];
+const addBook = getDomElement('#addBook');
 
 addBook.addEventListener('click', () => {
   addBookToLibrary();
