@@ -1,3 +1,5 @@
+// const { constants } = require("buffer");
+
 const myLibrary = [];
 
 function Book(title, author, pages, readStatus) {
@@ -5,6 +7,9 @@ function Book(title, author, pages, readStatus) {
   this.author = author;
   this.pages = pages;
   this.readStatus = readStatus;
+  this.toggleStatus = function () {
+    this.readStatus = !this.readStatus;
+  };
 }
 
 function getUserInput() {
@@ -56,7 +61,7 @@ function cleanNoticeBoard() {
   document.querySelector('#pages-notice').innerHTML = '';
 }
 
-function cleanForm(){
+function cleanForm() {
   document.querySelector('#title').value = '';
   document.querySelector('#author').value = '';
   document.querySelector('#pages').value = '';
@@ -72,8 +77,7 @@ function addCard(arr, obj) {
       <div class='card-body'>
         <h5 class='card-title'>${obj.author}</h5>
         <p class='card-text'>${obj.pages} pages</p>
-        ${obj.readStatus ? "<a href='#' class='btn btn-success'>Read</a>"
-    : "<a href='#' class='btn btn-primary'>Not read</a>"}
+        <a href='#' class="btn ${obj.readStatus ? 'btn-success' : 'btn-primary'} toggle" data-index-number="${arr.indexOf(obj)}">${obj.readStatus ? 'Read' : 'Not read'}</a>
         <a href='#' class='btn btn-danger dlt-button' data-index-number="${arr.indexOf(obj)}">Delete</a>
       </div>
     </div>
@@ -89,8 +93,10 @@ function printCard(arr) {
   booksList = document.querySelector('#books_list');
 
   booksList.innerHTML = markup;
-  let allDeleteBtn = document.querySelectorAll('.dlt-button');
+  const allDeleteBtn = document.querySelectorAll('.dlt-button');
+  const allToggleBtn = document.querySelectorAll('.toggle');
   allDeleteBtn.forEach(dltButton => dltButton.addEventListener('click', deleteOneCard));
+  allToggleBtn.forEach(toggleButton => toggleButton.addEventListener('click', toggleBookStatus));
 }
 
 function addBookToLibrary() {
@@ -113,12 +119,19 @@ let deleteButtons = [];
 addBook.addEventListener('click', () => {
   addBookToLibrary();
   printCard(myLibrary);
-  cleanForm()
+  cleanForm();
 });
 
 function deleteOneCard(event) {
   const clickedButton = event.currentTarget;
   const correspondingBookIndex = clickedButton.dataset.indexNumber;
   myLibrary.splice(correspondingBookIndex, 1);
+  printCard(myLibrary);
+}
+
+function toggleBookStatus(event) {
+  const bookIndex = event.currentTarget.dataset.indexNumber;
+  const book = myLibrary[bookIndex];
+  book.toggleStatus();
   printCard(myLibrary);
 }
