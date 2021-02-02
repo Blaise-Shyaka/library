@@ -96,8 +96,6 @@ function addCard(arr, obj) {
   return card;
 }
 
-// let booksList = [];
-
 function printCard(arr) {
   const markup = arr.map(elt => addCard(arr, elt)).join('');
   const booksList = getDomElement('#books_list');
@@ -124,6 +122,14 @@ function addBookToLibrary() {
 }
 
 const addBook = getDomElement('#addBook');
+const newBook = getDomElement('#toggle-add-book');
+
+function toggleNewBook() {
+  const elt = newBook;
+  const form = getDomElement('.form_book');
+  elt.classList.toggle('d-none');
+  form.classList.toggle('d-none');
+}
 
 addBook.addEventListener('click', () => {
   addBookToLibrary();
@@ -146,12 +152,4 @@ function toggleBookStatus(event) {
   printCard(myLibrary);
 }
 
-const newBook = getDomElement('#toggle-add-book');
 newBook.addEventListener('click', toggleNewBook);
-
-function toggleNewBook() {
-  const elt = newBook;
-  const form = getDomElement('.form_book');
-  elt.classList.toggle('d-none');
-  form.classList.toggle('d-none');
-}
