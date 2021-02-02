@@ -1,7 +1,12 @@
 /* eslint-disable func-names */
 /* eslint-disable no-use-before-define */
 import {
-  getDomElement, setInnerHTML, setValue, setCheckedValue, getAllElementsOfType, addEvent,
+  getDomElement,
+  setInnerHTML,
+  setValue,
+  setCheckedValue,
+  getAllElementsOfType,
+  addEvent,
 // eslint-disable-next-line import/extensions
 } from './dom.js';
 
@@ -91,11 +96,11 @@ function addCard(arr, obj) {
   return card;
 }
 
-let booksList = [];
+// let booksList = [];
 
 function printCard(arr) {
   const markup = arr.map(elt => addCard(arr, elt)).join('');
-  booksList = getDomElement('#books_list');
+  const booksList = getDomElement('#books_list');
   setInnerHTML(booksList, markup);
   const allDeleteBtn = getAllElementsOfType('.dlt-button');
   const allToggleBtn = getAllElementsOfType('.toggle');
@@ -124,6 +129,7 @@ addBook.addEventListener('click', () => {
   addBookToLibrary();
   printCard(myLibrary);
   cleanForm();
+  toggleNewBook();
 });
 
 function deleteOneCard(event) {
@@ -138,4 +144,14 @@ function toggleBookStatus(event) {
   const book = myLibrary[bookIndex];
   book.toggleStatus();
   printCard(myLibrary);
+}
+
+const newBook = getDomElement('#toggle-add-book');
+newBook.addEventListener('click', toggleNewBook);
+
+function toggleNewBook() {
+  const elt = newBook;
+  const form = getDomElement('.form_book');
+  elt.classList.toggle('d-none');
+  form.classList.toggle('d-none');
 }
